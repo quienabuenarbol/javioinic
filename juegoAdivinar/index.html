@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Jueguecico</title>
+
+    <script>
+
+        function onLoad(){
+            // Creamos un numero aleatorio del 1 al 100 y lo guardamos...
+            var numeroPremiado = Math.ceil((Math.random()*100));
+            console.log(numeroPremiado);
+
+            // Determinamos el número de intentos permitidos para acertar...
+            var intentos = 5;
+            console.log(intentos);
+
+            do{
+                // Pedimos al usuario que inserte un número del uno al 100...
+                var numeroUsuario = prompt("Introduce tu número, tienes " + intentos + " intentos");
+                console.log(numeroUsuario);
+          
+                // Calculamos si es mayor, menor o igual...
+                comparaNumero(numeroPremiado, numeroUsuario, intentos);
+                intentos--;
+            }
+            while(intentos > 0);
+
+
+
+
+        }
+
+
+        /*------- FUNCIONES ---------*/
+        
+        function acetate(){
+            onLoad();
+        }
+
+        function comparaNumero(numeroPremiado, numeroUsuario, intentos){
+            if (numeroPremiado == numeroUsuario){
+                alert("Enhorabuena, has acertado");
+                acetate(numeroIntento);
+            }else
+            if (numeroPremiado < numeroUsuario){
+                alert("Te has pasado, prueba otra vez, te quedan " + (intentos-1) + " intentos");
+            }else
+            if (numeroPremiado > numeroUsuario){
+                alert("Te has quedado corto, prueba otra vez, te quedan " + (intentos-1) + " intentos");
+            }
+        }
+
+        window.onload = onLoad;
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>
