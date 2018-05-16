@@ -1,8 +1,8 @@
 
 /*---- Constantes ----*/
 
-const T_FILAS = 2;
-const T_COLUMNAS = 2;
+const T_FILAS = 4;
+const T_COLUMNAS = 4;
 
 /*-Imagenes-*/
 const listaImagenes = [
@@ -14,7 +14,7 @@ const listaImagenes = [
 
 /* ---- FUNCIONES ---- */
 
-function elegirImagen(){
+function elegirImagen() {
     var aleatorioImg = Math.floor(Math.random() * listaImagenes.length);
 
     console.log(aleatorioImg);
@@ -26,7 +26,7 @@ function genera_tabla(filas, columnas) {
     var marcoJuego = document.getElementById("contenedorTabla");
 
     // Crea un elemento <table> y un elemento <tbody>
-    var tabla   = document.createElement("table");
+    var tabla = document.createElement("table");
     var tBody = document.createElement("tbody");
 
     // Crea las celdas
@@ -34,7 +34,7 @@ function genera_tabla(filas, columnas) {
         // Crea las filas...
         var hilera = document.createElement("tr");
         // Las columnas...
-        for (var j = 0; j < columnas; j++) {        
+        for (var j = 0; j < columnas; j++) {
             var celda = document.createElement("td");
             var imagenCelda = document.createElement("img");
             var reverso = document.createElement("div");
@@ -55,7 +55,7 @@ function genera_tabla(filas, columnas) {
     marcoJuego.appendChild(tabla);
     // modifica el atributo "border" de la tabla y lo fija a "2";
     //tabla.setAttribute("border", "2");
-  }
+}
 
 
-  genera_tabla(T_FILAS, T_COLUMNAS);
+genera_tabla(T_FILAS, T_COLUMNAS);
