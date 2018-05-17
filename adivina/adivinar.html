@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>
+        ADIVINA adivinanza
+    </title>
+    <!--
+        *
+        *El código de esta clase, es un poco misterioso. Algún programador Clase "C", no ha usado
+        *nombres descriptivos y ahora, nos toca pegarnos y descubrir qué narices hace este código, 
+        *para poder usarlo en nuestro proyecto.
+        *
+        *
+        *Se pide:
+        *
+        *1) Adivinar la funcionalidad del método adivinaQueHace
+        *2) Una vez descubierto, aplicar un nombre apropiado al método
+        *3) Idear un método equivalente, pero distinto. Es decir, crear un método 
+        *que haga lo mismo que adivinaQueHace, pero de otra manera.
+        *4) EXTRA: Sólo si resolviste los puntos anteriores, implementa una versión recursiva
+    -->
+    <script language="javascript">
+        function esPalindromo() {
+            var bd = true;
+            var cad = document.getElementById("palabra").value;
+            var i = 0;
+            var j = cad.length - 1;
+            while ((i <= j) && (bd)) {
+                bd = cad.charAt(i) == cad.charAt(j);
+                i++;
+                j--;
+            }
+            return bd;
+        }
+
+        function miEsPalindromo() {
+            var esUnPalindromo = true;
+            var palabraATestear = document.getElementById("palabra").value;
+            var palabraInvertida = [];
+            for (i = 0; i < palabraATestear.length; i++){
+                palabraInvertida[(palabraATestear.length - 1)-i] = palabraATestear[i];
+            }
+            
+            //palabraInvertida = palabraInvertida.reverse;
+            console.log(palabraInvertida);
+        }
+        
+    </script>
+</head>
+
+<body>
+    <label for="palabra">PALABRA</label>
+    <input type="text" id="palabra">
+    <button onclick="miEsPalindromo();">Empieza</button>
+    <div id="resultado"></div>
+</body>
+
+</html>
