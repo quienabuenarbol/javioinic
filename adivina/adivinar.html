@@ -46,9 +46,12 @@
             for (i = 0; i < palabraATestear.length; i++){
                 palabraInvertida[(palabraATestear.length - 1)-i] = palabraATestear[i];
             }
-            
+            compararIgualdad(palabraATestear, palabraInvertida);
             //palabraInvertida = palabraInvertida.reverse;
             console.log(palabraInvertida);
+        }
+        function compararIgualdad(A, B){
+            A == B ? console.log("Es palíndromo") : console.log("No es palíndromo");
         }
         
     </script>
