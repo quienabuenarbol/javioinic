@@ -27,11 +27,13 @@ function aniade_al_array(){
 }
 
 function genera_tabla(arrayDeNombres){
-    
+
     var nuevoNombre = document.createElement("p");
     celda.appendChild(nuevoNombre);
 
     nuevoNombre.innerHTML = arrayDeNombres[arrayDeNombres.length - 1];
 
-
 }
+
+var seleccionado = document.querySelectorAll(":hover");
+delete seleccionado;
