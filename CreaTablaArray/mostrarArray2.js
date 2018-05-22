@@ -9,6 +9,7 @@ var divTabla = document.getElementById("tabla");
 var tabla = document.createElement("table");
 var columna = document.createElement("tr");
 var celda = document.createElement("td");
+celda.setAttribute("onclick","cogerId(event)");
 
 // Creo la tabla añadiendo los elementos creados como hijos unos de otros...
 divTabla.appendChild(tabla);
@@ -32,8 +33,13 @@ function genera_tabla(arrayDeNombres){
     celda.appendChild(nuevoNombre);
 
     nuevoNombre.innerHTML = arrayDeNombres[arrayDeNombres.length - 1];
+    var idProv = arrayDeNombres.length - 1;
+    nuevoNombre.setAttribute("id", idProv);
 
 }
 
-var seleccionado = document.querySelectorAll(":hover");
-delete seleccionado;
+function cogerId(event) { 
+    var seleccionado = event.target;
+    seleccionado.style.visibility = "hidden";
+    seleccionado.remove;
+}
