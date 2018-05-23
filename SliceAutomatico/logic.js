@@ -32,7 +32,22 @@ function preCarga(){
     }
 
     botonAuto.onclick = function(){
-        setInterval(cambiarImagenes(), 1000);
+        var intervalo = setInterval(cambiarImagenes, 1000);
+    }
+
+    botonStop.onclick = function(){
+        clearInterval(intervalo);
+    }
+
+    function cambiarImagenes(){
+        console.log("entro en cambiar imagenes");
+        if (elementImg.src == srcImagen1){
+            console.log("cambio a imagen 2");         
+            elementImg.src = srcImagen2;
+        }else{
+            console.log("cambio a imagen 1");            
+            elementImg.src = srcImagen1;
+        }
     }
 
 
