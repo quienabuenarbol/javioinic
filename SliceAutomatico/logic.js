@@ -10,6 +10,7 @@ function preCarga(){
     var srcImagen1 = "imagenes/images1.jpeg";
     var srcImagen2 = "imagenes/images2.jpeg";
     
+    var intervalo;
     var contenedorImagenes = document.getElementById("contImages");
 
     var botonColor1 = document.getElementById("bColor1");
@@ -32,7 +33,7 @@ function preCarga(){
     }
 
     botonAuto.onclick = function(){
-        var intervalo = setInterval(cambiarImagenes, 1000);
+        intervalo = setInterval(cambiarImagenes, 1000);
     }
 
     botonStop.onclick = function(){
