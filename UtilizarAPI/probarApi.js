@@ -5,6 +5,12 @@
 - trackPrice - int
 - currency - string
 - previewUrl - audio
+
+    TODO 
+    - Gif de carga.
+    - Cuando la busqueda no devuelve resultados.
+    - busca con intro. (onChange)
+    - Hacer checkbox.
 */
 
 var xmlHttp = new XMLHttpRequest();
@@ -13,19 +19,34 @@ const DIR_API_ITUNES = "https://itunes.apple.com/search?term="
 
 var term;
 var media = "music";
-var limit = 20
+var limit = 20;
+
+var gifEspera;
 
 var terminoBusqueda = document.getElementById("searchTerm");
 var botonBusqueda = document.getElementById("btnbuscar");
 var direccionCompleta;
 var respuesta_obj;
+var marcoJuego = document.getElementById("contenedorTabla");
+
 
 var filas;
+
+var lista_detalles = [
+    "artistId",
+    "artistName",
+    "artworkUrl60",
+    "trackPrice",
+    "currency",
+    "previewUrl"
+];
 
 function componerPeticion(){
     console.log("componerPeticion llamada");
     term = terminoBusqueda.value;
     direccionCompleta = DIR_API_ITUNES + term + "&media=" + media + "&limit=" + limit;
+
+    marcoJuego.appendChild(gifEspera); 
 
     xmlHttp.onreadystatechange = realizarBusqueda;
     xmlHttp.open("GET", direccionCompleta, true);
@@ -41,30 +62,83 @@ function realizarBusqueda(){
             respuesta_obj = JSON.parse(xmlHttp.responseText);
             console.log(respuesta_obj);
             filas = respuesta_obj.resultCount;
-            genera_tabla(filas, 6);
+            numeroDetalles = lista_detalles.length;
+            marcoJuego.removeChild(marcoJuego.firstChild);
+            generar_tabla(filas, numeroDetalles);
         }
     }
 }
 
-function genera_tabla(filas, columnas) {
+function generar_tabla(filas, columnas){
+    //var marcoJuego = document.getElementById("contenedorTabla");
+    var tabla = document.createElement("table");
+    for (var i = 0; i < filas; i++) {
+        var hilera = document.createElement("tr");
+        for (var j = 0; j < columnas; j++) {
+            var celda = document.createElement("td");
+            var detalle = lista_detalles[j];
+            switch(j){
+                case 0:
+                    celda.innerHTML = respuesta_obj.results[i][detalle];
+                    celda.setAttribute("style", "visibility:hidden");
+                    break;
+                case 1:
+                    celda.innerHTML = respuesta_obj.results[i][detalle];
+                    break;
+                case 2:
+                    var imagenCelda = document.createElement("img");
+                    imagenCelda.setAttribute("src", respuesta_obj.results[i][detalle]);
+                    celda.appendChild(imagenCelda);
+                    break;
+                case 3:
+                    celda.innerHTML = respuesta_obj.results[i][detalle] + 2;
+                    break;
+                case 4:
+                    celda.innerHTML = respuesta_obj.results[i][detalle];
+                    break;
+                case 5:
+                    var clip = document.createElement("audio");
+                    clip.setAttribute("controls","Play");
+                    var clipSrc = document.createElement("source");
+                    clipSrc.setAttribute("src", respuesta_obj.results[i][detalle]);
+                    clip.appendChild(clipSrc);
+                    celda.appendChild(clip);
+                    break;
+                default:
+                    console.log("case default");
+                    break;          
+            }
+            hilera.appendChild(celda);
+        }
+        tabla.appendChild(hilera);
+    }
+    marcoJuego.appendChild(tabla);
+
+
+
+}
+
+ /*
+function generar_tabla(filas, columnas) {
+
     // Obtener la referencia del elemento contenedor
     var marcoJuego = document.getElementById("contenedorTabla");
-
     // Crea un elemento <table> y un elemento <tbody>
     var tabla = document.createElement("table");
     var tBody = document.createElement("tbody");
+    
 
-    // Crea las celdas
     for (var i = 0; i < filas; i++) {
-        // Crea las filas...
+
         var hilera = document.createElement("tr");
-        // Las columnas...
+        var artistaActual = respuesta_obj.results[i].artistName
+        hilera.innerHTML = artistaActual;
+
         for (var j = 0; j < columnas; j++) {
             var celda = document.createElement("td");
             var imagenCelda = document.createElement("img");
-            var reverso = document.createElement("div");
-            //imagenCelda.setAttribute("src", elegirImagen());
-            celda.appendChild(respuesta_obj.results[j].artistName);
+            imagenCelda.setAttribute("src", respuesta_obj.results[i].artworkUrl60);
+            celda.appendChild(imagenCelda);
             hilera.appendChild(celda);
         }
 
@@ -79,10 +153,13 @@ function genera_tabla(filas, columnas) {
     // modifica el atributo "border" de la tabla y lo fija a "2";
     tabla.setAttribute("border", "2");
 }
+*/
 
 
 function preCarga(){
-    console.log("Precarga llamada");    
+    gifEspera = document.createElement("img");
+    gifEspera.setAttribute("src", "https://thumbs.gfycat.com/ZestyKeenCrocodile-max-1mb.gif");
+    console.log("Precarga llamada");
 }
 
 botonBusqueda.onclick = componerPeticion;
