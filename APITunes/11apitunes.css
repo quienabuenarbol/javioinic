@@ -16,3 +16,6 @@ th {
 audio {
     border: 2px solid black; 
 }
+input[type="checkbox"]{
+    background-color: blue;
+}

@@ -2,12 +2,17 @@ var xmlHttp;
 var url; 
 var lista;
 var tabla;
+var urlCompraProfe = "http://10.1.2.10:8080/appwebprofe/Comprar";
+
+var botonCompra;
 
 onload = inicio;
 
 function inicio(){
     xmlHttp = new XMLHttpRequest();
     tabla = document.getElementById("tabla");
+    botonCompra = document.getElementById("boton_compra");
+    botonCompra.onclick = crearArraySeleccionados;
 }
 
 function procesarEventosRecibir(){
@@ -67,7 +72,7 @@ function imprimirLista() {
                         "<input type='checkbox' name ='comprar' value='" + lista[i].trackId + "'>"
                         ]
             crearFila(i, array_fila);
-            document.getElementById("boton_compra").hidden = false;
+            botonCompra.hidden = false;
         }
     }
     else {
@@ -100,4 +105,37 @@ function crearFila(fila_num, array){
         celda.innerHTML = array[i];
         fila.appendChild(celda);
     }
+}
+
+
+function crearArraySeleccionados(){
+    var checkedValue = []; 
+    var inputElements = document.querySelectorAll('input[type="checkbox"]');
+    for(var i=0; inputElements[i]; ++i){
+        if(inputElements[i].checked){
+            checkedValue.push(inputElements[i].value);
+            //return checkedValue;
+            //break;
+
+        }
+    }
+    var nuevaCompra = new LaCompra(15, checkedValue);
+    enviarCarrito(nuevaCompra);
+}
+
+function crearObjPaEnviar(){
+
+}
+
+function enviarCarrito(carrito){
+    xmlHttp.onreadystatechange = procesarEventosRecibir;
+    xmlHttp.open('POST', urlCompraProfe, true); 
+    xmlHttp.setRequestHeader('Content-Type', 'application/json');
+    xmlHttp.send(carrito);
+    console.log(xmlHttp.responseText);
+}
+
+function LaCompra(sumaCarrito, checkedValue){
+    this.suma = sumaCarrito;
+    this.lista = checkedValue;
 }
