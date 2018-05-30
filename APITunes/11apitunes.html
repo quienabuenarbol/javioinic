@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
+    <title>Busca canciones en iTunes</title>
+    <link rel="stylesheet" type="text/css" href="11apitunes.css">
+    <script type="text/javascript" src="11apitunes.js"></script>
+</head>
+<body>
+    <div id="busqueda">
+        <input type="text" id = "caja" onchange="buscarCancion()">
+        <button onclick="buscarCancion()">Buscar</button>
+    </div>
+
+    <img src="buscando.gif" id="gif" hidden="true">
+    <form>
+        <table id="tabla">
+        </table>
+        <br>
+        <button hidden="true" id="boton_compra">Comprar</button>
+    </form>
+
+</body>
+</html>
