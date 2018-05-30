@@ -33,7 +33,7 @@ var marcoJuego = document.getElementById("contenedorTabla");
 var filas;
 
 var lista_detalles = [
-    "artistId",
+    "trackId",
     "artistName",
     "artworkUrl60",
     "trackPrice",
