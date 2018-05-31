@@ -119,7 +119,7 @@ function crearArraySeleccionados(){
 
         }
     }
-    var nuevaCompra = new LaCompra(15, checkedValue);
+    var nuevaCompra = new LaCompra(2.99, checkedValue);
     enviarCarrito(nuevaCompra);
 }
 
@@ -131,11 +131,11 @@ function enviarCarrito(carrito){
     xmlHttp.onreadystatechange = procesarEventosRecibir;
     xmlHttp.open('POST', urlCompraProfe, true); 
     xmlHttp.setRequestHeader('Content-Type', 'application/json');
-    xmlHttp.send(carrito);
+    xmlHttp.send(JSON.stringify(carrito));
     console.log(xmlHttp.responseText);
 }
 
 function LaCompra(sumaCarrito, checkedValue){
-    this.suma = sumaCarrito;
-    this.lista = checkedValue;
+    this.precio_pedido = sumaCarrito;
+    this.lista_ids = checkedValue;
 }
