@@ -2,8 +2,10 @@
 var xmlHttp = new XMLHttpRequest();
 const DIR_SERV = "http://10.1.2.10:8080/appwebprofe/SubirRecord";
 var ranking;
-var rankingNombres;
-var rankingTiempos;
+var rankingNombres = [];
+var rankingTiempos = [];
+
+var contenedorRanking = document.getElementById("contenedor_lista");
 
 
 function procesarEventosRecibir(){
@@ -38,10 +40,30 @@ function Puntuacion(nombre, tiempo){
 
 function imprimirranking(ranking){
     console.log(ranking);
-    for (let i = 0; i < ranking.length; i++) {
-        const rankingNombres = ranking[i].nombre;
+    for (let i = 0; i < ranking.ranking.length; i++) {
+        rankingNombres.push(ranking.ranking[i].nombre);
+        rankingTiempos.push(ranking.ranking[i].tiempo);
+        var fila = document.createElement("TR");
+        if ( i%2 == 0){
+            fila.style.background = "#DFF0FF";
+        }
+        else {
+            fila.style.background = "#DFFFF0";
+        }
+        contenedorRanking.appendChild(fila);
         
+        var celdaN = document.createElement("TD");
+        celdaN.style.height = "40px";
+        
+        var celdaT = document.createElement("TD");
+        celdaT.style.height = "40px";      
+
+        celdaN.innerHTML = ranking.ranking[i].nombre;
+        fila.appendChild(celdaN);
+        celdaT.innerHTML = ranking.ranking[i].tiempo;
+        fila.appendChild(celdaT);
     }
+
     //ranking.ranking. = JSON.stringify(ranking);
     //ranking.sort();
     
