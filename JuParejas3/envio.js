@@ -7,6 +7,9 @@ var rankingTiempos = [];
 
 var contenedorRanking = document.getElementById("contenedor_lista");
 
+var colNombre = document.getElementById("col_nombre");
+var colTiempo = document.getElementById("col_tiempo");
+
 
 function procesarEventosRecibir(){
     
@@ -41,8 +44,8 @@ function Puntuacion(nombre, tiempo){
 function imprimirranking(ranking){
     console.log(ranking);
     for (let i = 0; i < ranking.ranking.length; i++) {
-        rankingNombres.push(ranking.ranking[i].nombre);
-        rankingTiempos.push(ranking.ranking[i].tiempo);
+        //rankingNombres.push(ranking.ranking[i].nombre);
+        //rankingTiempos.push(ranking.ranking[i].tiempo);
         var fila = document.createElement("TR");
         if ( i%2 == 0){
             fila.style.background = "#DFF0FF";
@@ -67,4 +70,14 @@ function imprimirranking(ranking){
     //ranking.ranking. = JSON.stringify(ranking);
     //ranking.sort();
     
+}
+
+colNombre.onclick = ordenarPorNombre;
+colTiempo.onclick = ordenarPorTiempo;
+
+function ordenarPorNombre(){
+    console.log("ordenarPorNombre");
+}
+function ordenarPorTiempo(){
+    console.log("ordenarPorTiempo");    
 }
